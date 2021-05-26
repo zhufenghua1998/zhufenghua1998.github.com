@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="Viewport" content="width=device-width" />
+        <title>随机获取一个笑话</title>
+		<link href="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-d1251a95-7cdf-472b-8fdb-6916f8bffd61/dfae0df6-7bbc-4c60-bd24-f5d562bd2c08.ico" rel="shortcut icon" type="image/x-icon">
+        <style>
+            html,body{
+                height: 100%;
+            }
+            #header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+            }
+            .showjoke{
+                font-size: 24px;
+            }
+            #footer{
+                text-align:center;
+                vertical-align:middle
+            }
+            .btn{
+                cursor: pointer;
+                background-color: rgb(93,195,214);
+                height: 50px;
+                width: 140px;
+            }
+            li{
+                list-style-type: none;
+                margin:  0 .5rem;
+            }
+            #copy{
+                width: 120px;
+                height: 40px;
+            }
+        </style>
+        <!--引入官方axios.min.js-->
+        <script src="../../../js/axios.min.js"></script>
+        <!--引入jsdeliver的vue.js-->
+        <script src="../../../js/vue.js"></script>
+        <!--引入clipboard.js-->
+        <script src="../../../js/clipboard.min.js"></script>
+    </head>
+    <body>
+        <div id="header" style="background-color:white;height:15%;">
+            <div><h2 align="center"><a href="../../../index.html">首页</a></h2></div>
+            <div><h2 align="center">随机获取一个笑话</h2></div>
+            <div>
+                <ul style="display:flex;justify-content:center;align-items: center;">
+                    <li>已经是第一个啦</li>
+                    <li><a href="#">下一个</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="main" style="background-color:#dddddd;height:55%;overflow:auto;">
+            <span id="jk" class="showjoke" v-text="joke"></span>
+        </div>
+        <div id="footer" style="background-color:#ededd0;height:30%;">
+            <input class="btn" type="button" value="不好笑?重新获取笑话" onclick="javascript:vm.getJoke();rese();"/>
+            <input id="copy" type="button" value="复制" />
+        </div>
+        <script>
+            window.onload = function(){
+                vm.getJoke();
+            }
+            var vm = new Vue({
+               el:'#main',
+               data:{
+                   joke:"正在获取一个笑话..."
+               },
+               methods:{
+                    getJoke(){
+                        var that = this;
+                        axios.get("https://autumnfish.cn/api/joke/list?num=1").then(function(response){
+                           that.joke = response.data.jokes[0];
+                        },function(err){
+                            alert("出错啦");
+                        });
+                    }
+               }
+            });
+        </script>
+        <script>
+            // 使用target属性，指定要复制的是元素的text
+    var clipboard = new ClipboardJS('#copy', {
+        target: function() {
+            return document.getElementById("jk");
+        }
+    });
+        // 复制成功事件
+        clipboard.on('success', function(e) {
+            document.getElementById("copy").value = "复制成功";
+            setTimeout("recopy()",3000 );  
+        });
+        // 复制失败事件
+        clipboard.on('error', function(e) {
+            document.getElementById("copy").value = "复制失败";
+        });
+        function rese(){
+            document.getElementById("copy").value = "复制";
+        }
+        function recopy(){
+            document.getElementById("copy").value = "重新复制?";
+        }
+        </script>
+    </body>
+</html>
