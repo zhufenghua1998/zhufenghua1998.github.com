@@ -1,240 +1,147 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hans">
+<style>
+    html, body {
+        width: 100%;
+        margin: 0;
+    }
+
+    html {
+        height: 100%;
+    }
+
+    body {
+        min-height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+    }
+
+    p {
+        word-break: break-all;
+    }
+
+    @media (max-width: 500px) {
+        h1 {
+            margin-top: 80px;
+        }
+    }
+
+    .flex {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .block {
+        display: block;
+        position: relative;
+    }
+
+    .url {
+        font-size: 18px;
+        padding: 10px 10px 10px 5px;
+        position: relative;
+        width: 300px;
+        border: none;
+        border-bottom: 1px solid #bfbfbf;
+    }
+
+    input:focus {
+        outline: none;
+    }
+
+    .bar {
+        content: '';
+        height: 2px;
+        width: 100%;
+        bottom: 0;
+        position: absolute;
+        background: #00bfb3;
+        transition: 0.2s ease transform;
+        -moz-transition: 0.2s ease transform;
+        -webkit-transition: 0.2s ease transform;
+        transform: scaleX(0);
+    }
+
+    .url:focus ~ .bar {
+        transform: scaleX(1);
+    }
+
+    .btn {
+        line-height: 38px;
+        background-color: #00bfb3;
+        color: #fff;
+        white-space: nowrap;
+        text-align: center;
+        font-size: 14px;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+        padding: 5px;
+        width: 160px;
+        margin: 30px 0;
+    }
+
+    .tips, .example {
+        color: #7b7b7b;
+        position: relative;
+        align-self: flex-start;
+        margin-left: 7.5em;
+    }
+
+    .tips > p:first-child::before {
+        position: absolute;
+        left: -3em;
+        content: 'PS：';
+        color: #7b7b7b
+    }
+
+    .example > p:first-child::before {
+        position: absolute;
+        left: -7.5em;
+        content: '合法输入示例：';
+        color: #7b7b7b
+    }
+</style>
 <head>
-  <meta charset="utf-8">
-  
-  
-  <title>zhufenghua&#39;s blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="zhufenghua&#39;s blog">
-<meta property="og:url" content="https://zhufenghua.com/index.html">
-<meta property="og:site_name" content="zhufenghua&#39;s blog">
-<meta property="og:locale" content="zh_CN">
-<meta property="article:author" content="zhufenghua">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="zhufenghua's blog" type="application/atom+xml">
-  
-  
-    <link rel="shortcut icon" href="/favicon.png">
-  
-  
-    
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/typeface-source-code-pro@0.0.71/index.min.css">
-
-  
-  
-<link rel="stylesheet" href="/css/style.css">
-
-  
-    
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.min.css">
-
-  
-<meta name="generator" content="Hexo 5.4.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/" id="logo">zhufenghua&#39;s blog</a>
-      </h1>
-      
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <script>
+        function toSubmit(e) {
+            e.preventDefault()
+            window.open('/' + document.getElementsByName('q')[0].value);
+            return false
+        }
+    </script>
+    <title>GitHub 文件加速</title>
+</head>
+<body class="flex">
+<a style="position: absolute;top: 0;right: 0;" href="https://github.com/hunshcn/gh-proxy"><img width="149" height="149" referrerPolicy="no-referrer"
+                                                                                               src="https://inews.gtimg.com/newsapp_ls/0/12025455907/0"
+                                                                                               alt="Fork me on GitHub"
+                                                                                               data-recalc-dims="1"></a>
+<h1 style="margin-bottom: 50px"><img src="https://ae01.alicdn.com/kf/H2fc84859291347418b11091fe0e508b8v.png" style="width: 1.5em;margin-right: .2em;vertical-align: bottom;">GitHub 文件加速</h1>
+<form action="./" method="get" style="padding-bottom: 40px" target="_blank" class="flex" onsubmit="toSubmit(event)">
+    <label class="block" style="width: fit-content">
+        <input class="block url" name="q" type="text" placeholder="键入Github文件链接"
+               pattern="^((https|http):\/\/)?(github\.com\/.+?\/.+?\/(?:releases|archive|blob|raw|suites)|((?:raw|gist)\.(?:githubusercontent|github)\.com))\/.+$" required>
+        <div class="bar"></div>
+    </label>
+    <input class="block btn" type="submit" value="下载">
+    <div class="tips"><p>GitHub文件链接带不带协议头都可以，支持release、archive以及文件，右键复制出来的链接都是符合标准的，更多用法、clone加速请参考<a href="https://hunsh.net/archives/23/">这篇文章</a>。</p>
+        <p>release、archive使用cf加速，文件会跳转至JsDelivr</p>
+        <p>注意，不支持项目文件夹</p></div>
+    <div class="example">
+        <p>分支源码：https://github.com/hunshcn/project/archive/master.zip</p>
+        <p>release源码：https://github.com/hunshcn/project/archive/v0.1.0.tar.gz</p>
+        <p>release文件：https://github.com/hunshcn/project/releases/download/v0.1.0/example.zip</p>
+        <p>分支文件：https://github.com/hunshcn/project/blob/master/filename</p>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives">Archives</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS 订阅"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜索"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="搜索"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://zhufenghua.com"></form>
-      </div>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main">
-  
-    <article id="post-first" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/25/first/" class="article-date">
-  <time class="dt-published" datetime="2021-05-25T15:16:25.057Z" itemprop="datePublished">2021-05-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>##这是我的第一篇文章<br>内容仅供测试<br>##end</p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zhufenghua.com/2021/05/25/first/" data-id="ckp5cq2j00000igs388wy1rlo" data-title="" class="article-share-link">分享</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-    <article id="post-hello-world" class="h-entry article article-type-post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  <div class="article-meta">
-    <a href="/2021/05/25/hello-world/" class="article-date">
-  <time class="dt-published" datetime="2021-05-25T14:15:45.809Z" itemprop="datePublished">2021-05-25</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="p-name article-title" href="/2021/05/25/hello-world/">Hello World</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="e-content article-entry" itemprop="articleBody">
-      
-        <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="https://zhufenghua.com/2021/05/25/hello-world/" data-id="ckp5cq2j70001igs37x9dcv8o" data-title="Hello World" class="article-share-link">分享</a>
-      
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-
-  
-
-
-</section>
-        
-          <aside id="sidebar">
-  
-    
-
-  
-    
-
-  
-    
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">归档</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/05/">五月 2021</a></li></ul>
-    </div>
-  </div>
-
-
-  
-    
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/2021/05/25/first/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2021/05/25/hello-world/">Hello World</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
-
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      
-      &copy; 2021 zhufenghua<br>
-      Powered by <a href="https://hexo.io/" target="_blank">Hexo</a>
-    </div>
-  </div>
-</footer>
-
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives" class="mobile-nav-link">Archives</a>
-  
-</nav>
-    
-
-
-<script src="/js/jquery-3.4.1.min.js"></script>
-
-
-
-  
-<script src="/fancybox/jquery.fancybox.min.js"></script>
-
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-
-  </div>
+</form>
+<p style="position: sticky;top: calc(100% - 2.5em);">项目基于Cloudflare Workers，开源于GitHub <a style="color: #3294ea"
+                                                                                         href="https://github.com/hunshcn/gh-proxy">hunshcn/gh-proxy</a>
+</p>
 </body>
 </html>
